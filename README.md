@@ -1,4 +1,5 @@
 # Multi-modal Transportation Optimization
+
 A project on using mathematical programming to solve multi-modal transportation cost minimization in goods delivery and supply chain management.
 ## Catalogue
 [**Project Overview**](https://github.com/hzjken/multimodal-transportation-optimization/#project-overview)<br>
@@ -60,7 +61,7 @@ A variable matrix used to support the decision variable matrix. It's a 3 dimensi
 ```python
   varList2 = model.integer_var_list(portDim * portDim * timeDim,name = 'y')
   y = np.array(varList2).reshape(portDim, portDim, timeDim)
-  ```
+```
 
 3. **Route Usage Matrix:** &nbsp;&nbsp; ***Z***<br>
 A variable matrix used to support the decision variable matrix. It's a 3 dimensional matrix, with each dimension representing start port, end port and time respectively. Each element in the matrix is a binary variable, representing whether a route is used or not. For instance, ***Z<sub>i,j,t</sub>*** represents whether the route from **port i** to **port j** at **time t** is used or not (no matter which goods). It's introduced with similar purpose to ***Y<sub>i,j,t</sub>*** .
@@ -80,7 +81,7 @@ A 3 dimensional parameter matrix, each dimension representing start port, end po
 
 3. **Warehouse Cost:** &nbsp;&nbsp; ***wh***<br>
 A one dimension array with dimension start port. ***wh<sub>i</sub>*** represents the warehouse cost per cubic meter per day at **port i**. Warehouse cost for ports with no warehouse function (like airport, railway station etc.) is set to be big M.
- 
+
 4. **Transportation Time:** &nbsp;&nbsp; ***T***<br>
 A 3 dimensional parameter matrix, each dimension representing start port, end port and time. ***T<sub>i,j,t</sub>*** in the matrix represents the overall transportation time from **port i** to **port j** at **time t**. This overall time includes custom clearance time, handling time, transit time and extra time from [**model data.xlsx**](https://github.com/hzjken/multimodal-transportation-optimization/blob/master/model%20data.xlsx). For infeasible route, the time element will be set to be big M.
 
