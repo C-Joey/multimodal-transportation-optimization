@@ -5,6 +5,7 @@ Created on Thu Mar 15 09:32:04 2018
 @author: Ken Huang
 """
 from docplex.mp.model import Model
+# from docplex.mp.mcondaodel import Model
 from itertools import product
 import numpy as np
 import cvxpy as cp
