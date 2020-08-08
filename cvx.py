@@ -1,23 +1,35 @@
 import cvxpy as cp
 import numpy as np
-
-# Problem data.
-m = 30
-n = 20
-np.random.seed(1)
-A = np.random.randn(m, n)
-b = np.random.randn(m)
-
-# Construct the problem.
-x = cp.Variable(n)
-objective = cp.Minimize(cp.sum_squares(A*x - b))
-constraints = [0 <= x, x <= 1]
-prob = cp.Problem(objective, constraints)
-
-# The optimal objective value is returned by `prob.solve()`.
-result = prob.solve()
-# The optimal value for x is stored in `x.value`.
+# Create two scalar optimization variables.
+n = 5
+# cvxpy使用cp.Variable(n,intger = True) 中的intger参数来规定x变量为整数
+x = cp.Variable(n, integer=True)
+# # Create two constraints.
+A1 = np.ones((5, 5))
+for i in range(A1.shape[0]):
+    for j in range(A1.shape[1]):
+        if i == j:
+            pass
+        else:
+            A1[i, j] = A1[i, j] * 0
+A2 = A1 * (-1)
+A3 = np.array([[-1, 0, 0, 0, 0],
+               [-0.9, -1, 0, 0, 0],
+               [-0.8, -(40 / 48), -1, 0, 0],
+               [-0.3, -(5 / 8), -0.8, -1, 0]
+              ])
+B = np.array([0, 0, 0, 0, 0, 25, 12, 12.5, 2, 0,
+              10, 40, 90, 80, 0, 40, 2, -30, 32])
+A = np.vstack((A2, A1, A1, A3))
+constraints = [A @ x <= B]
+objects = cp.Minimize(cp.sum(x))
+# Define and solve the GUROBI problem.
+prob = cp.Problem(objects, constraints)
+# 调用GUROBI
+prob.solve(solver=cp.CPLEX)
+# Print result.
+print("\nThe optimal value is", prob.value)
+print("A solution x is")
 print(x.value)
-# The optimal Lagrange multiplier for a constraint is stored in
-# `constraint.dual_value`.
-print(constraints[0].dual_value)
+# print(help(prob))
+# print (cp.installed_solvers())

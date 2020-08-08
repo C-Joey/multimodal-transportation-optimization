@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Mar 15 09:32:04 2018
-
 @author: Ken Huang
 """
 from docplex.mp.model import Model
-# from docplex.mp.mcondaodel import Model
 from itertools import product
 import numpy as np
 import cvxpy as cp
@@ -68,7 +66,7 @@ class MMT:
             self.framework = framework
 
     def set_param(self, route, order):
-        '''set model parameters based on the read-in route and order information.'''
+        # '''set model parameters based on the read-in route and order information.'''
 
         bigM = 100000
         route = route[route['Feasibility'] == 1]
@@ -272,7 +270,7 @@ class MMT:
         '''
         try:
             if self.framework == 'CVXPY':
-                self.objective_value = self.model.solve(solver)
+                self.objective_value = self.model.solve()   #solve(solve)
                 self.xs = np.zeros((self.portSpace, self.portSpace, self.dateSpace, self.goods))
                 self.xs[self.var_location] = self.var.value
                 self.ys = np.zeros((self.portSpace, self.portSpace, self.dateSpace))
