@@ -4,11 +4,14 @@ Created on Thu Mar 15 09:32:04 2018
 @author: Ken Huang
 """
 from docplex.mp.model import Model
+import gurobipy
+import cplex
 from itertools import product
 import numpy as np
 import cvxpy as cp
 import pandas as pd
 import json
+import time
 
 
 class MMT:
@@ -69,9 +72,21 @@ class MMT:
         # '''set model parameters based on the read-in route and order information.'''
 
         bigM = 100000
-        route = route[route['Feasibility'] == 1]
-        route['Warehouse Cost'][route['Warehouse Cost'].isnull()] = bigM
+        x = route.copy()
+
+
+        route = x.loc[x['Feasibility']== 1]
+        print(route['Feasibility'])
+
+        # route['Warehouse Cost'][route['Warehouse Cost'].isnull()] = bigM
+        # dfmi.loc[:,('one', 'second')]
+        y = route.copy()
+
+        y['Warehouse Cost'].fillna(bigM, inplace = True)
+        route = y
+
         route = route.reset_index()
+        print(route['Warehouse Cost'])
 
         portSet = set(route['Source']) | set(route['Destination'])
 
@@ -137,6 +152,7 @@ class MMT:
         self.var_2_location = tuple(zip(*var_2_location))
 
         self.var_3_location = self.var_2_location
+
 
     def build_model(self):
         '''overall function to build up model objective and constraints'''
@@ -270,7 +286,7 @@ class MMT:
         '''
         try:
             if self.framework == 'CVXPY':
-                self.objective_value = self.model.solve()   #solve(solve)
+                self.objective_value = self.model.solve(solver=cp.GUROBI)   #solve(solve)
                 self.xs = np.zeros((self.portSpace, self.portSpace, self.dateSpace, self.goods))
                 self.xs[self.var_location] = self.var.value
                 self.ys = np.zeros((self.portSpace, self.portSpace, self.dateSpace))
@@ -356,7 +372,10 @@ class MMT:
                 route_txt += "  To: " + j[1]
                 route_txt += "  By: " + travelMode[(j[0], j[1])]
                 a += 1
+
             txt += route_txt
+
+            txt += '\n'+ str(time.ctime())
 
         return txt
 
@@ -366,7 +385,11 @@ def transform(filePath):
     be processed by the operation research model.'''
     order = pd.read_excel(filePath, sheet_name='Order Information')
     route = pd.read_excel(filePath, sheet_name='Route Information')
-    order['Tax Percentage'][order['Journey Type'] == 'Domestic'] = 0
+    # order['Tax Percentage'][order['Journey Type'] == 'Domestic'] = 0
+
+    # order.loc['Tax Percentage',(order['Journey Type'] == 'Domestic')] = 0
+    order.loc[order.loc[:,'Journey Type']=='Domestic','Tax Percentage'] = 0
+
     route['Cost'] = route[route.columns[7:12]].sum(axis=1)
     route['Time'] = np.ceil(route[route.columns[14:18]].sum(axis=1) / 24)
     route = route[list(route.columns[0:4]) + ['Fixed Freight Cost', 'Time', \
@@ -381,6 +404,10 @@ def transform(filePath):
 
 
 if __name__ == '__main__':
+
+    start = time.time()
+
+
     order, route = transform("model data.xlsx")
     m = MMT()
     # m = MMT(framework='CVXPY') # for open source framework
@@ -390,3 +417,16 @@ if __name__ == '__main__':
     txt = m.txt_solution(route, order)
     with open("Solution.txt", "w") as text_file:
         text_file.write(txt)
+
+    end = time.time()
+    print(str( end-start))
+
+
+
+
+
+
+
+#test
+# order, route = transform("model data.xlsx")
+# m.set_param(route, order)
