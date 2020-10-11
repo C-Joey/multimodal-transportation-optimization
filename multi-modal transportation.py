@@ -409,10 +409,16 @@ if __name__ == '__main__':
     m.set_param(route, order)
     m.build_model()
     m.solve_model()
+
     txt = m.txt_solution(route, order)
+    end = time.time()
+    time_runout = str(end-start)
+    print('time run out: \n'+ time_runout)  #time record
+    
+
     with open("Solution.txt", "w") as text_file:
         text_file.write(txt)
+        text_file.write('\n'+time_runout)
 
-    end = time.time()
-    print(str(end-start))
+    
 

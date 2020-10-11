@@ -14,7 +14,7 @@ Route:
 (3)Date: 2018-02-03  From: Malaysia Port  To: Shanghai Port  By: Sea
 (4)Date: 2018-02-10  From: Shanghai Port  To: Shanghai Warehouse  By: Truck
 (5)Date: 2018-02-11  From: Shanghai Warehouse  To: Wuxi Warehouse  By: Truck
-Wed Sep 23 14:07:52 2020
+Sun Oct 11 17:19:24 2020
 ------------------------------------
 Goods-2  Category: Furniture
 Start date: 2018-02-02
@@ -23,7 +23,7 @@ Route:
 (1)Date: 2018-02-02  From: Malaysia Warehouse  To: Malaysia Port  By: Truck
 (2)Date: 2018-02-03  From: Malaysia Port  To: Shanghai Port  By: Sea
 (3)Date: 2018-02-10  From: Shanghai Port  To: Shanghai Warehouse  By: Truck
-Wed Sep 23 14:07:52 2020
+Sun Oct 11 17:19:24 2020
 ------------------------------------
 Goods-3  Category: Paper plates
 Start date: 2018-02-03
@@ -33,7 +33,7 @@ Route:
 (2)Date: 2018-02-06  From: Malaysia Warehouse  To: Malaysia Port  By: Truck
 (3)Date: 2018-02-07  From: Malaysia Port  To: Shanghai Port  By: Sea
 (4)Date: 2018-02-14  From: Shanghai Port  To: Shanghai Warehouse  By: Truck
-Wed Sep 23 14:07:52 2020
+Sun Oct 11 17:19:24 2020
 ------------------------------------
 Goods-4  Category: Pharmaceutical drugs
 Start date: 2018-02-04
@@ -43,7 +43,7 @@ Route:
 (2)Date: 2018-02-06  From: Malaysia Warehouse  To: Malaysia Port  By: Truck
 (3)Date: 2018-02-07  From: Malaysia Port  To: Shanghai Port  By: Sea
 (4)Date: 2018-02-14  From: Shanghai Port  To: Shanghai Warehouse  By: Truck
-Wed Sep 23 14:07:52 2020
+Sun Oct 11 17:19:24 2020
 ------------------------------------
 Goods-5  Category: Cigarette
 Start date: 2018-02-05
@@ -53,7 +53,7 @@ Route:
 (2)Date: 2018-02-06  From: Shanghai Warehouse  To: Shanghai Port  By: Truck
 (3)Date: 2018-02-07  From: Shanghai Port  To: Malaysia Port  By: Sea
 (4)Date: 2018-02-14  From: Malaysia Port  To: Malaysia Warehouse  By: Truck
-Wed Sep 23 14:07:52 2020
+Sun Oct 11 17:19:24 2020
 ------------------------------------
 Goods-6  Category: Apple
 Start date: 2018-02-06
@@ -63,18 +63,19 @@ Route:
 (2)Date: 2018-02-07  From: Shanghai Port  To: Malaysia Port  By: Sea
 (3)Date: 2018-02-14  From: Malaysia Port  To: Malaysia Warehouse  By: Truck
 (4)Date: 2018-02-15  From: Malaysia Warehouse  To: Singapore Warehouse  By: Truck
-Wed Sep 23 14:07:52 2020
+Sun Oct 11 17:19:24 2020
 ------------------------------------
 Goods-7  Category: Durian
 Start date: 2018-02-07
 Arrival date: 2018-02-08
 Route:
 (1)Date: 2018-02-07  From: Malaysia Warehouse  To: Singapore Warehouse  By: Truck
-Wed Sep 23 14:07:52 2020
+Sun Oct 11 17:19:24 2020
 ------------------------------------
 Goods-8  Category: Furniture
 Start date: 2018-02-08
 Arrival date: 2018-02-09
 Route:
 (1)Date: 2018-02-08  From: Wuxi Warehouse  To: Shanghai Warehouse  By: Truck
-Wed Sep 23 14:07:52 2020
+Sun Oct 11 17:19:24 2020
+3.104095697402954
