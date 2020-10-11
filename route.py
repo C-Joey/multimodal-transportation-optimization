@@ -9,7 +9,7 @@ def transform(filePath):
 
     order.loc['Tax Percentage',(order['Journey Type'] == 'Domestic')] = 0
 
-    route['Cost'] = route[route.columns[7:12]].sum(axis=1)
+    # route['Cost'] = route[route.columns[7:12]].sum(axis=1)
     route['Time'] = np.ceil(route[route.columns[14:18]].sum(axis=1) / 24)
     route = route[list(route.columns[0:4]) + ['Fixed Freight Cost', 'Time', \
                                               'Cost', 'Warehouse Cost', 'Travel Mode', 'Transit Duty'] + list(

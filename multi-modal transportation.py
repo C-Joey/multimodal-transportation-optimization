@@ -73,10 +73,7 @@ class MMT:
 
         bigM = 100000
         x = route.copy()
-
-
         route = x.loc[x['Feasibility']== 1]
-        print(route['Feasibility'])
 
         # route['Warehouse Cost'][route['Warehouse Cost'].isnull()] = bigM
         # dfmi.loc[:,('one', 'second')]
@@ -84,9 +81,7 @@ class MMT:
 
         y['Warehouse Cost'].fillna(bigM, inplace = True)
         route = y
-
         route = route.reset_index()
-        print(route['Warehouse Cost'])
 
         portSet = set(route['Source']) | set(route['Destination'])
 
@@ -286,7 +281,7 @@ class MMT:
         '''
         try:
             if self.framework == 'CVXPY':
-                self.objective_value = self.model.solve(solver=cp.GUROBI)   #solve(solve)
+                self.objective_value = self.model.solve()   #solve(solve)
                 self.xs = np.zeros((self.portSpace, self.portSpace, self.dateSpace, self.goods))
                 self.xs[self.var_location] = self.var.value
                 self.ys = np.zeros((self.portSpace, self.portSpace, self.dateSpace))
@@ -410,7 +405,7 @@ if __name__ == '__main__':
 
     order, route = transform("model data.xlsx")
     m = MMT()
-    # m = MMT(framework='CVXPY') # for open source framework
+    m = MMT(framework='DOCPLEX') # for open source framework
     m.set_param(route, order)
     m.build_model()
     m.solve_model()
@@ -419,14 +414,5 @@ if __name__ == '__main__':
         text_file.write(txt)
 
     end = time.time()
-    print(str( end-start))
+    print(str(end-start))
 
-
-
-
-
-
-
-#test
-# order, route = transform("model data.xlsx")
-# m.set_param(route, order)
